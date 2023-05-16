@@ -18,7 +18,7 @@ endif()
 
 project ("OpenCL_project")
 #add_subdirectory(OpenCL_info)
-add_subdirectory(OpenCl-SDK)
+add_subdirectory(OpenCL-SDK)
 
 
 
