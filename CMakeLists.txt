@@ -20,8 +20,5 @@ project ("OpenCL_project")
 #add_subdirectory(OpenCL_info)
 add_subdirectory(OpenCL-SDK)
 
-
-
-
 add_executable (OpenCL_project "main.cpp")
 target_link_libraries(OpenCL_project PUBLIC OpenCL::OpenCL OpenCL::HeadersCpp)

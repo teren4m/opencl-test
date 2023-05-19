@@ -15,6 +15,9 @@
 #define DEVICE CL_DEVICE_TYPE_DEFAULT
 #endif
 
+#define CL_HPP_TARGET_OPENCL_VERSION 200
+#define CL_TARGET_OPENCL_VERSION 200
+
 float gen_random() { return rand() / (float)RAND_MAX; }
 
 std::string load_program(std::string input) {
@@ -105,29 +108,35 @@ std::string from_lib() {
 int main() {
 	cl_uint platformCount;
 	clGetPlatformIDs(0, NULL, &platformCount);
+	cl_platform_id platform_ids[platformCount];
+	clGetPlatformIDs(0, platform_ids, NULL);
 	std::string info = std::to_string(platformCount);
-	//std::cout << "Len: " << LENGTH << std::endl;
 
-	//std::vector<float> h_a(LENGTH);
-	//std::vector<float> h_b(LENGTH);
-	//std::vector<float> h_c(LENGTH);
+	cl_uint devicesCount;
+	clGetDeviceIDs(platform_ids[0], CL_DEVICE_TYPE_ALL, 0, NULL, &devicesCount);
 
-	//// declare device containers
-	//cl::Buffer d_a;
-	//cl::Buffer d_b;
-	//cl::Buffer d_c;
+	std::cout << "Len: " << LENGTH << std::endl;
 
-	//// fill host containers with random numbers
-	//std::generate(h_a.begin(), h_a.end(), gen_random);
-	//std::generate(h_b.begin(), h_b.end(), gen_random);
+	std::vector<float> h_a(LENGTH);
+	std::vector<float> h_b(LENGTH);
+	std::vector<float> h_c(LENGTH);
 
-	//// create a context
-	//cl::Device device = cl::Device::getDefault();
+	// declare device containers
+	cl::Buffer d_a;
+	cl::Buffer d_b;
+	cl::Buffer d_c;
+
+	// fill host containers with random numbers
+	std::generate(h_a.begin(), h_a.end(), gen_random);
+	std::generate(h_b.begin(), h_b.end(), gen_random);
+
+	// create a context
+	// cl::Device device = cl::Device::Device;
 	//unsigned int device_name = 1;
 	//std::string device_vendor;
 	//cl::Context context(device);
 	//cl_int err = device.getInfo(CL_DEVICE_VERSION, &device_vendor);
-	std::cout << info << std::endl;
+	std::cout << devicesCount << std::endl;
 	//std::cout << device_vendor << std::endl;
 	return 0;
 }
